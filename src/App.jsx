@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import background from "./assets/image_accueil.png"; // ton image de fond
+import background from "./assets/image_accueil.png"; 
 
 function App() {
   const [pseudo, setPseudo] = useState("");
