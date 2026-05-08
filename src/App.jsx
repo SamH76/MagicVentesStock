@@ -1,37 +1,21 @@
-import { useState } from "react";
-import "./App.css";
-import background from "./assets/image_accueil.png"; 
+import { useState } from 'react'
+import IdentificationPage from './Pages/IdentificationPage.jsx'
+import AccueilPage from './Pages/AccueilPage.jsx'
 
 function App() {
-  const [pseudo, setPseudo] = useState("");
-  const [password, setPassword] = useState("");
+  const [authenticatedUser, setAuthenticatedUser] = useState(null)
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Connexion avec pseudo: ${pseudo}, mot de passe: ${password}`);
-  };
+  if (!authenticatedUser) {
+    return <IdentificationPage onAuthenticated={setAuthenticatedUser} />
+  }
 
   return (
-    <div className="login-page" style={{ backgroundImage: `url(${background})` }}>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Pseudo"
-          value={pseudo}
-          onChange={(e) => setPseudo(e.target.value)}
-        />
-
-        <input
-          type="password"
-          placeholder="Mot de Passe"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <button type="submit">S’identifier</button>
-      </form>
-    </div>
-  );
+    <AccueilPage
+      user={authenticatedUser}
+      onLogout={() => setAuthenticatedUser(null)}
+    />
+  )
 }
 
-export default App;
+export default App
+
